@@ -8,44 +8,53 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp2
+namespace WindowsFormsApp4
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
-            MaximizeBox = false;
-            this.Size = new Size(640, 480);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.BackColor = Color.Beige;
-
             InitializeComponent();
+
+            string[] myFruit = { "A", "B", "C", "D", "E", "F" };
+            checkedListBox1.Items.AddRange(myFruit);
+
+            checkedListBox1.CheckOnClick = true;
+            checkedListBox1.Font = new Font("Arial Black", 23);
+            checkedListBox1.BackColor = Color.Beige;
+            checkedListBox1.MultiColumn = true;
+
+            button1.Enabled = false;
+            button1.Text = "Продолжить";
+            button1.Font = new Font("Arial Black", 24);
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            var graphics = e.Graphics;
-            var start = 65;
-            var end = start + 300;
 
-            for (int step = start; step < end + 1; step += 50)
-                graphics.DrawLine(new Pen(Color.Gray, 2), new Point(step, start), new Point(step, end));
-            for (int step = start; step < end + 1; step += 50)
-                graphics.DrawLine(new Pen(Color.Gray, 2), new Point(start, step), new Point(end, step));
-
-            for (int i = start; i < end + 1; i += 50)
-                for (int j = start; j < end + 1; j += 50)
-                    ButtonCreator(i, j);
         }
 
-        protected void ButtonCreator(int x, int y)
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Button button = new Button();
-            button.Size = new Size(6, 6);
-            button.Left = x - 3;
-            button.Top = y - 3;
-            this.Controls.Add(button);
+            List<string> result = new List<string> { "A", "B", "C" };
+            List<string> checkingResponses = new List<string> {};
+            foreach (object itemChecked in checkedListBox1.CheckedItems)
+            {
+                checkingResponses.Add(itemChecked.ToString());
+            }
+
+            if (checkingResponses.SequenceEqual(result))
+                button1.Enabled = true;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    public class Levels
+    {
+
     }
 }
