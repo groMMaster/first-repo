@@ -66,14 +66,18 @@ namespace WindowsFormsApp4
             Level += 1;
             if (Level == Levels.LevelList.Count)
             {
-                
+                Controls.Clear();
+                BackgroundImage = Resource1.Win;
             }
 
-            GraphicСondition.Image = Levels.LevelList[Level].Condition;
-            JumpButton.Enabled = false;
-            ResponseForm.Items.Clear();
-            ResponseForm.Items.AddRange(new string[] { "A", "B", "C", "D", "E", "F" });
-            TextСondition.Text = Levels.LevelList[Level].Question;
+            else
+            {
+                GraphicСondition.Image = Levels.LevelList[Level].Condition;
+                JumpButton.Enabled = false;
+                ResponseForm.Items.Clear();
+                ResponseForm.Items.AddRange(new string[] { "A", "B", "C", "D", "E", "F" });
+                TextСondition.Text = Levels.LevelList[Level].Question; 
+            }
         }
     }
 
